@@ -20,7 +20,35 @@ def main():
                     CargarLista(nombres, codigos, stocks, precios, duraciones)
                 # Opcion 2, Actualizar Pelicula
                 elif opcionAdm == 2:
-                    print("aca se rompe, no se que pingo hace la funcion actualizar, que es la que hay que llamar")
+                    codPeli = int(input("Ingrese el código de la película a modificar: "))
+                    existe, pos = verificarDuplicado(codigos, codPeli)
+                    if not existe:
+                        print("Código no encontrado.")
+                        input("Presione una tecla para continuar...")
+                    else:
+                        flagMod = 0
+                        while flagMod == 0:
+                            opcionMod = mostrarMenuModificar()
+                            if opcionMod == 1:
+                                nuevoNombre = input("Ingrese el nuevo nombre: ")
+                                nombres = actualizar(nombres, nuevoNombre, codigos, codPeli)
+                            elif opcionMod == 2:
+                                nuevoCodigo = int(input("Ingrese el nuevo código: "))
+                                codigos = actualizar(codigos, nuevoCodigo, codigos, codPeli)
+                            elif opcionMod == 3:
+                                nuevoStock = int(input("Ingrese el nuevo stock: "))
+                                stocks = actualizar(stocks, nuevoStock, codigos, codPeli)
+                            elif opcionMod == 4:
+                                nuevoPrecio = int(input("Ingrese el nuevo precio: "))
+                                precios = actualizar(precios, nuevoPrecio, codigos, codPeli)
+                            elif opcionMod == 5:
+                                nuevaDuracion = int(input("Ingrese la nueva duración: "))
+                                duraciones = actualizar(duraciones, nuevaDuracion, codigos, codPeli)
+                            elif opcionMod == 6:
+                                flagMod = 1
+                            else:
+                                print("Opción inválida.")
+
                 # Opcion 3, Mostrar peliculas, abre el menu cliente, ya que solo puede ver y no modificar
                 elif opcionAdm == 3:
                     opcionMostrar = mostrarMenuCliente()
@@ -41,8 +69,7 @@ def main():
                         estado, posicion = verificarDuplicado(nombres, buscado)
                         if estado == True:
                             print("Nombre   Codigo   Stock   Precio   Duracion")
-                            print(nombres[posicion], "  ", codigos[posicion], "   ", stocks[posicion], "    ",
-                                  precios[posicion], "   ", duraciones[posicion])
+                            print(nombres[posicion], "  ", codigos[posicion], "   ", stocks[posicion], "    ", precios[posicion], "   ", duraciones[posicion])
                         else:
                             print("Película no encontrada.")
                         input("Presione una tecla para continuar...")
@@ -52,7 +79,7 @@ def main():
                     # Cualquier otro ingreso sera invalido
                     else:
                         print("Opción inválida")
-
+                # Opcion 4, Salir
                 elif opcionAdm == 4:
                     flagSalirAdm = 1
                 else:

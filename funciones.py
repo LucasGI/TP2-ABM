@@ -1,5 +1,4 @@
 # Función para cargar listas con la información de películas
-
 def CargarLista(nombrePelicula, codPelicula, stockPelicula, precioPelicula, duracionPelicula):
     # Solicita el nombre de la primera película
     nombre = input("Ingrese una película (0 para salir): ")
@@ -42,13 +41,15 @@ def CargarLista(nombrePelicula, codPelicula, stockPelicula, precioPelicula, dura
         nombre = input("Ingrese una película (0 para salir): ")
 
 # Función para mostrar las listas de películas en pantalla
+
 def mostrarLista(nombres, codigos, stocks, precios, duraciones):
     clear()
     for i in range(len(nombres)):
+        
         print("Película:", nombres[i])
         print("Código:", codigos[i])
         print("Stock:", stocks[i])
-        print("Precio:", precios[i])
+        print("Precio: $", precios[i])
         print("Duración:", duraciones[i])
         print("-" * 30)
 
@@ -138,6 +139,16 @@ def mostrarMenuCliente():
     print("3. Listar películas por codigo")
     print("4. Buscar película")
     print("5. Volver")
+    return int(input("Seleccione una opción: "))
+
+def mostrarMenuModificar():
+    print("\n=== Menú Modificar Película ===")
+    print("1. Modificar nombre")
+    print("2. Modificar código")
+    print("3. Modificar stock")
+    print("4. Modificar precio")
+    print("5. Modificar duración")
+    print("6. Volver")
     return int(input("Seleccione una opción: "))
 
 

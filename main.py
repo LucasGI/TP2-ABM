@@ -5,12 +5,15 @@ def main():
     nombres, codigos, stocks, precios, duraciones = hardcodearPeliculas()
     flagSeguir = 1
 
+
+
     while flagSeguir == 1:
         opcion = mostrar_menu()
 
         # Opcion 1, ingresa como administrador
         if opcion == 1:
             flagSalirAdm = 0
+            #log_in()
             while flagSalirAdm == 0:
                 opcionAdm = mostrarMenuAdm()
                 # Opcion 1, Cargar Pelicula

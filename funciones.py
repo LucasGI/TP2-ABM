@@ -122,7 +122,7 @@ def mostrar_menu():
     print("2. Ingresar como cliente")
     print("3. Salir")
 
-    ingreso = input("Ingrese una opcion: ")
+    ingreso = int(input("Ingrese una opcion: "))
 
     if ingreso != 1 and ingreso != 2 and ingreso != 3 and ingreso != " " :
         print("Opcion Invalida")
@@ -139,7 +139,7 @@ def mostrarMenuAdm():
     print("2. Modificar película")
     print("3. Mostrar peliculas")
     print("4. Volver")
-    ingreso = input("Ingrese una opcion: ")
+    ingreso = int(input("Ingrese una opcion: "))
 
     if ingreso != 1 and ingreso != 2 and ingreso != 3 and ingreso != 4 and ingreso != " ":
         print("Opcion Invalida")
@@ -156,7 +156,7 @@ def mostrarMenuCliente():
     print("3. Listar películas por codigo")
     print("4. Buscar película")
     print("5. Volver")
-    ingreso = input("Ingrese una opcion: ")
+    ingreso = int(input("Ingrese una opcion: "))
 
     if ingreso != 1 and ingreso != 2 and ingreso != 3 and ingreso !=5 and ingreso != " ":
         print("Opcion Invalida")
@@ -173,7 +173,7 @@ def mostrarMenuModificar():
     print("4. Modificar precio")
     print("5. Modificar duración")
     print("6. Volver")
-    ingreso = input("Ingrese una opcion: ")
+    ingreso = int(input("Ingrese una opcion: "))
 
     if ingreso != 1 and ingreso != 2 and ingreso != 3 and ingreso != 4 and ingreso != 5 and ingreso != 6 and ingreso != " ":
         print("Opcion Invalida")
@@ -182,4 +182,16 @@ def mostrarMenuModificar():
         return ingreso
     #return int(input("Seleccione una opción: "))
 
+"""
+Lo guardo para mas tarde, en el sprint 7
 
+def log_in():
+    clear()
+    print("\n=== Login ===")
+
+    password = input("Ingrese la contraseña: ")
+    while password != "admin123" :
+        print("Contraseña incorrecta")
+        password = input("Reintentar ")
+
+"""

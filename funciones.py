@@ -1,3 +1,4 @@
+
 # Función para cargar listas con la información de películas
 def CargarLista(nombrePelicula, codPelicula, stockPelicula, precioPelicula, duracionPelicula):
     # Solicita el nombre de la primera película
@@ -120,7 +121,16 @@ def mostrar_menu():
     print("1. Ingresar como administrador")
     print("2. Ingresar como cliente")
     print("3. Salir")
-    return int(input("Seleccione una opción: "))
+
+    ingreso = input("Ingrese una opcion: ")
+
+    if ingreso != 1 and ingreso != 2 and ingreso != 3 and ingreso != " " :
+        print("Opcion Invalida")
+        input("presione una tecla ")
+    else:
+        return ingreso
+
+     #return int(input("Seleccione una opción: "))
 
 def mostrarMenuAdm():
     clear()
@@ -129,7 +139,14 @@ def mostrarMenuAdm():
     print("2. Modificar película")
     print("3. Mostrar peliculas")
     print("4. Volver")
-    return int(input("Seleccione una opción: "))
+    ingreso = input("Ingrese una opcion: ")
+
+    if ingreso != 1 and ingreso != 2 and ingreso != 3 and ingreso != 4 and ingreso != " ":
+        print("Opcion Invalida")
+        input("presione una tecla ")
+    else:
+        return ingreso
+    #return int(input("Seleccione una opción: "))
 
 def mostrarMenuCliente():
     clear()
@@ -139,7 +156,14 @@ def mostrarMenuCliente():
     print("3. Listar películas por codigo")
     print("4. Buscar película")
     print("5. Volver")
-    return int(input("Seleccione una opción: "))
+    ingreso = input("Ingrese una opcion: ")
+
+    if ingreso != 1 and ingreso != 2 and ingreso != 3 and ingreso !=5 and ingreso != " ":
+        print("Opcion Invalida")
+        input("presione una tecla ")
+    else:
+        return ingreso
+    #return int(input("Seleccione una opción: "))
 
 def mostrarMenuModificar():
     print("\n=== Menú Modificar Película ===")
@@ -149,6 +173,13 @@ def mostrarMenuModificar():
     print("4. Modificar precio")
     print("5. Modificar duración")
     print("6. Volver")
-    return int(input("Seleccione una opción: "))
+    ingreso = input("Ingrese una opcion: ")
+
+    if ingreso != 1 and ingreso != 2 and ingreso != 3 and ingreso != 4 and ingreso != 5 and ingreso != 6 and ingreso != " ":
+        print("Opcion Invalida")
+        input("presione una tecla ")
+    else:
+        return ingreso
+    #return int(input("Seleccione una opción: "))
 
 

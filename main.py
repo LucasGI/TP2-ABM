@@ -1,6 +1,5 @@
 from funciones import *
 
-
 def main():
 
     nombres, codigos, stocks, precios, duraciones = hardcodearPeliculas()
@@ -8,7 +7,6 @@ def main():
 
     while flagSeguir == 1:
         opcion = mostrar_menu()
-
 
         # Opcion 1, ingresa como administrador
         if opcion == 1:
@@ -48,7 +46,6 @@ def main():
                                 flagMod = 1
                             else:
                                 print("Opción inválida.")
-
                 # Opcion 3, Mostrar peliculas, abre el menu cliente, ya que solo puede ver y no modificar
                 elif opcionAdm == 3:
                     opcionMostrar = mostrarMenuCliente()
@@ -82,6 +79,7 @@ def main():
                 # Opcion 4, Salir
                 elif opcionAdm == 4:
                     flagSalirAdm = 1
+
                 else:
                     print("Opción inválida")
                     input("Presione cualquier tecla para continuar...")
@@ -91,18 +89,22 @@ def main():
             flagSalirCliente = 0
             while flagSalirCliente == 0:
                 opcionCliente = mostrarMenuCliente()
+                # Listar peliculas por precio
                 if opcionCliente == 1:
                     ordenarPeliculas("precio", nombres, codigos, stocks, precios, duraciones)
                     mostrarLista(nombres, codigos, stocks, precios, duraciones)
                     input("Presione una tecla para continuar...")
+                # Listar peliculas por nombre
                 elif opcionCliente == 2:
                     ordenarPeliculas("nombre", nombres, codigos, stocks, precios, duraciones)
                     mostrarLista(nombres, codigos, stocks, precios, duraciones)
                     input("Presione una tecla para continuar...")
+                # Listar peliculas por codigo
                 elif opcionCliente == 3:
                     ordenarPeliculas("codigo", nombres, codigos, stocks, precios, duraciones)
                     mostrarLista(nombres, codigos, stocks, precios, duraciones)
                     input("Presione una tecla para continuar...")
+                # Buscar pelicula
                 elif opcionCliente == 4:
                     buscado = input("Ingrese el nombre a buscar: ")
                     estado, posicion = verificarDuplicado(nombres, buscado)
@@ -112,11 +114,12 @@ def main():
                     else:
                         print("Película no encontrada.")
                     input("Presione una tecla para continuar...")
+                # Salir
                 elif opcionCliente == 5:
                     flagSalirCliente = 1
                 else:
                     print("Opción inválida")
-        # Opcion 3, Corta el programa
+        # Opcion 3, Sale del bucle principal
         elif opcion == 3:
             print("Saliendo del sistema...")
             flagSeguir = 0

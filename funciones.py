@@ -112,6 +112,80 @@ def hardcodearPeliculas():
     print("HARDCODEO DE PELICULAS.")
     return nombres, codigos, stocks, precios, duraciones
 
+def buscarPelicula(nombres, codigos, stocks, precios, duraciones):
+    print("Buscar por:")
+    print("1. Nombre")
+    print("2. Código")
+    opcion = input("Seleccione una opción (1 o 2): ")
+
+    if opcion == "1":
+        nombreBuscado = input("Ingrese el nombre de la película exactamente como fue cargado: ")
+        i = 0
+        while i < len(nombres) and nombres[i] != nombreBuscado:
+            i += 1
+
+        if i < len(nombres):
+            print("\n--- Película encontrada ---")
+            print("Nombre:", nombres[i])
+            print("Código:", codigos[i])
+            print("Stock:", stocks[i])
+            print("Precio: $", precios[i])
+            print("Duración:", duraciones[i], "min")
+            return i
+        else:
+            print("No se encontró una película con ese nombre.")
+            return -1
+
+    elif opcion == "2":
+        codigoBuscado = input("Ingrese el código de la película (solo números): ")
+        codigoBuscado = int(codigoBuscado)
+        i = 0
+        while i < len(codigos) and codigos[i] != codigoBuscado:
+            i += 1
+
+        if i < len(codigos):
+            print("\n--- Película encontrada ---")
+            print("Nombre:", nombres[i])
+            print("Código:", codigos[i])
+            print("Stock:", stocks[i])
+            print("Precio: $", precios[i])
+            print("Duración:", duraciones[i], "min")
+            return i
+        else:
+            print("No se encontró una película con ese código.")
+            return -1
+
+def calcularEstadisticas(lista, nombreCampo):
+    if len(lista) == 0:
+        print("No hay datos para calcular estadísticas.")
+        return
+
+    minimo = lista[0]
+    maximo = lista[0]
+    suma = 0
+    cantidad = 0
+
+    i = 0
+    while i < len(lista):
+        if lista[i] < minimo:
+            minimo = lista[i]
+        if lista[i] > maximo:
+            maximo = lista[i]
+        suma = suma + lista[i]
+        cantidad = cantidad + 1
+        i = i + 1
+
+    promedio = suma / cantidad
+
+    print("\n--- Estadísticas de", nombreCampo, "---")
+    print("Cantidad:", cantidad)
+    print("Mínimo:", minimo)
+    print("Máximo:", maximo)
+    print("Promedio:", promedio)
+
+#Ej de uso calcularEstadisticas(precioPelicula, "Precios") o calcularEstadisticas(duracionPelicula, "Duraciones")
+
+
 def clear():
     print("\n" * 50)
 

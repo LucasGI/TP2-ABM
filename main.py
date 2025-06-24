@@ -1,11 +1,10 @@
 from funciones import *
 
+# Funcion main del programa, donde esta el bucle principal.
 def main():
 
     nombres, codigos, stocks, precios, duraciones = hardcodearPeliculas()
     flagSeguir = 1
-
-
 
     while flagSeguir == 1:
         opcion = mostrar_menu()
@@ -13,7 +12,7 @@ def main():
         # Opcion 1, ingresa como administrador
         if opcion == 1:
             flagSalirAdm = 0
-            #log_in()
+            log_in()
             while flagSalirAdm == 0:
                 opcionAdm = mostrarMenuAdm()
                 # Opcion 1, Cargar Pelicula
@@ -65,14 +64,16 @@ def main():
                         mostrarLista(nombres, codigos, stocks, precios, duraciones)
                         input("Presione una tecla para continuar...")
                     elif opcionMostrar == 4:
-                        buscado = input("Ingrese el nombre a buscar: ")
-                        estado, posicion = verificarDuplicado(nombres, buscado)
-                        if estado == True:
-                            print("Nombre   Codigo   Stock   Precio   Duracion")
-                            print(nombres[posicion], "  ", codigos[posicion], "   ", stocks[posicion], "    ", precios[posicion], "   ", duraciones[posicion])
+                        opcionBusqueda = mostrarMenuBuscar()
+                        if opcionBusqueda == 1:
+                            buscarPelicula(nombres, codigos, stocks, precios, duraciones, "nombres")
+                            input("Presione una tecla para continuar...")
+                        elif opcionBusqueda == 2:
+                            buscarPelicula(nombres, codigos, stocks, precios, duraciones, "codigos")
+                            input("Presione una tecla para continuar...")
                         else:
-                            print("Película no encontrada.")
-                        input("Presione una tecla para continuar...")
+                            input("Presione una tecla para continuar...")
+
                     # Opcion 5, Salir
                     elif opcionMostrar == 5:
                         flagSalirAdm = 1
@@ -81,6 +82,7 @@ def main():
                         print("Opción inválida")
                 # Opcion 4, Salir
                 elif opcionAdm == 4:
+
                     flagSalirAdm = 1
 
                 else:
@@ -109,21 +111,33 @@ def main():
                     input("Presione una tecla para continuar...")
                 # Buscar pelicula
                 elif opcionCliente == 4:
-                    buscado = input("Ingrese el nombre a buscar: ")
-                    estado, posicion = verificarDuplicado(nombres, buscado)
-                    if estado == True:
-                        print("Nombre   Codigo   Stock   Precio   Duracion")
-                        print(nombres[posicion],"  ", codigos[posicion],"   ", stocks[posicion], "    ",precios[posicion],"   ", duraciones[posicion])
+                    opcionBusqueda = mostrarMenuBuscar()
+                    if opcionBusqueda == 1:
+                        buscarPelicula(nombres, codigos, stocks, precios, duraciones, "nombres")
+                        input("Presione una tecla para continuar...")
+                    elif opcionBusqueda == 2:
+                        buscarPelicula(nombres, codigos, stocks, precios, duraciones, "codigos")
+                        input("Presione una tecla para continuar...")
                     else:
-                        print("Película no encontrada.")
-                    input("Presione una tecla para continuar...")
+                        input("Presione una tecla para continuar...")
+
+
                 # Salir
                 elif opcionCliente == 5:
                     flagSalirCliente = 1
                 else:
                     print("Opción inválida")
-        # Opcion 3, Sale del bucle principal
         elif opcion == 3:
+            opcionCliente = mostrarMenuEstadisticas()
+            if opcionCliente == 1:
+                calcularEstadisticas(precios, "precio")
+                input("Presione una tecla para continuar...")
+            elif opcionCliente == 2:
+                calcularEstadisticas(duraciones, "duraciones")
+                input("Presione una tecla para continuar...")
+
+        # Opcion 3, Sale del bucle principal
+        elif opcion == 4:
             print("Saliendo del sistema...")
             flagSeguir = 0
         # Cualquier otra opcion es invalida

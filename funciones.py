@@ -42,7 +42,6 @@ def CargarLista(nombrePelicula, codPelicula, stockPelicula, precioPelicula, dura
         nombre = input("Ingrese una película (0 para salir): ")
 
 # Función para mostrar las listas de películas en pantalla
-
 def mostrarLista(nombres, codigos, stocks, precios, duraciones):
     clear()
     for i in range(len(nombres)):
@@ -61,20 +60,49 @@ def actualizar(lista, valor, codPelicula, codPeli):
             lista[i] = valor
     return lista
 
-# Función para verificar si un elemento ya existe en una lista
-def verificarDuplicado(lista, elemento):
-    i = 0
-    encontrado = False
+#Funcion para buscar peliculas por nombre o por codigo
+def buscarPelicula(nombres, codigos, stocks, precios, duraciones, criterio):
 
-    # Recorre la lista hasta encontrar el elemento
-    while i < len(lista) and lista[i] != elemento:
-        i = i + 1
+    if criterio == "nombres":
+        nombreBuscado = input("Ingrese el nombre de la película exactamente como fue cargado: ")
+        i = 0
+        while i < len(nombres) and nombres[i] != nombreBuscado:
+            i += 1
 
-    # Si lo encuentra, marca como duplicado
-    if i < len(lista):
-        encontrado = True
+        if i < len(nombres):
+            clear()
+            print(i, nombres[i])
+            print("\n--- Película encontrada ---")
+            print("Nombre:", nombres[i])
+            print("Código:", codigos[i])
+            print("Stock:", stocks[i])
+            print("Precio: $", precios[i])
+            print("Duración:", duraciones[i], "min")
+            return i
+        else:
+            print("No se encontró una película con ese nombre.")
+            return -1
 
-    return encontrado, i
+    elif criterio == "codigos":
+        codigoBuscado = input("Ingrese el código de la película (solo números): ")
+        codigoBuscado = int(codigoBuscado)
+        i = 0
+        while i < len(codigos) and codigos[i] != codigoBuscado:
+            i += 1
+
+        if i < len(codigos):
+            print("\n--- Película encontrada ---")
+            print("Nombre:", nombres[i])
+            print("Código:", codigos[i])
+            print("Stock:", stocks[i])
+            print("Precio: $", precios[i])
+            print("Duración:", duraciones[i], "min")
+            return i
+        else:
+            print("No se encontró una película con ese código.")
+            return -1
+    else:
+        print("Opcion invalida")
 
 # Funcion para poder ver cuanto es el precio que se espera a ganar si se venden cierta cantidad de stock de una pelicula
 def ingresoEsperado(listaPrecio, cantEsperada, codigoPelicula, codPeli):
@@ -84,6 +112,7 @@ def ingresoEsperado(listaPrecio, cantEsperada, codigoPelicula, codPeli):
                 valorEsperado = listaPrecio[i] * cantEsperada
     return valorEsperado
 
+# Funcion para ordenar peliculas segun el criterio que se le pase por parametro
 def ordenarPeliculas(criterio, nombres, codigos, stocks, precios, duraciones):
     if criterio == "nombre":
         clave = nombres
@@ -103,6 +132,7 @@ def ordenarPeliculas(criterio, nombres, codigos, stocks, precios, duraciones):
                 precios[j], precios[j + 1] = precios[j + 1], precios[j]
                 duraciones[j], duraciones[j + 1] = duraciones[j + 1], duraciones[j]
 
+# Funcion que hardcodea listas paralelas
 def hardcodearPeliculas():
     nombres = ["Shrek", "Matrix", "El Padrino", "Toy Story", "Titanic"]
     codigos = [101, 102, 103, 104, 105]
@@ -112,49 +142,7 @@ def hardcodearPeliculas():
     print("HARDCODEO DE PELICULAS.")
     return nombres, codigos, stocks, precios, duraciones
 
-def buscarPelicula(nombres, codigos, stocks, precios, duraciones):
-    print("Buscar por:")
-    print("1. Nombre")
-    print("2. Código")
-    opcion = input("Seleccione una opción (1 o 2): ")
-
-    if opcion == "1":
-        nombreBuscado = input("Ingrese el nombre de la película exactamente como fue cargado: ")
-        i = 0
-        while i < len(nombres) and nombres[i] != nombreBuscado:
-            i += 1
-
-        if i < len(nombres):
-            print("\n--- Película encontrada ---")
-            print("Nombre:", nombres[i])
-            print("Código:", codigos[i])
-            print("Stock:", stocks[i])
-            print("Precio: $", precios[i])
-            print("Duración:", duraciones[i], "min")
-            return i
-        else:
-            print("No se encontró una película con ese nombre.")
-            return -1
-
-    elif opcion == "2":
-        codigoBuscado = input("Ingrese el código de la película (solo números): ")
-        codigoBuscado = int(codigoBuscado)
-        i = 0
-        while i < len(codigos) and codigos[i] != codigoBuscado:
-            i += 1
-
-        if i < len(codigos):
-            print("\n--- Película encontrada ---")
-            print("Nombre:", nombres[i])
-            print("Código:", codigos[i])
-            print("Stock:", stocks[i])
-            print("Precio: $", precios[i])
-            print("Duración:", duraciones[i], "min")
-            return i
-        else:
-            print("No se encontró una película con ese código.")
-            return -1
-
+#Ej de uso calcularEstadisticas(precioPelicula, "Precios") o calcularEstadisticas(duracionPelicula, "Duraciones")
 def calcularEstadisticas(lista, nombreCampo):
     if len(lista) == 0:
         print("No hay datos para calcular estadísticas.")
@@ -176,25 +164,26 @@ def calcularEstadisticas(lista, nombreCampo):
         i = i + 1
 
     promedio = suma / cantidad
-
+    clear()
     print("\n--- Estadísticas de", nombreCampo, "---")
     print("Cantidad:", cantidad)
     print("Mínimo:", minimo)
     print("Máximo:", maximo)
     print("Promedio:", promedio)
 
-#Ej de uso calcularEstadisticas(precioPelicula, "Precios") o calcularEstadisticas(duracionPelicula, "Duraciones")
-
-
+# simula una funcion de clear printeando 50 bajadas de linea
 def clear():
     print("\n" * 50)
 
+# Menu principal
 def mostrar_menu():
     clear()
     print("\n=== Sistema de Gestión de Películas ===")
     print("1. Ingresar como administrador")
     print("2. Ingresar como cliente")
-    print("3. Salir")
+    print("3. Estadisticas")
+    print("4. Salir")
+
 
     ingreso = int(input("Ingrese una opcion: "))
 
@@ -206,6 +195,7 @@ def mostrar_menu():
 
      #return int(input("Seleccione una opción: "))
 
+# Menu del administrador
 def mostrarMenuAdm():
     clear()
     print("\n=== Menú Administrador ===")
@@ -220,8 +210,8 @@ def mostrarMenuAdm():
         input("presione una tecla ")
     else:
         return ingreso
-    #return int(input("Seleccione una opción: "))
 
+# Menu del cliente
 def mostrarMenuCliente():
     clear()
     print("\n=== Menú Mostrar ===")
@@ -232,13 +222,13 @@ def mostrarMenuCliente():
     print("5. Volver")
     ingreso = int(input("Ingrese una opcion: "))
 
-    if ingreso != 1 and ingreso != 2 and ingreso != 3 and ingreso !=5 and ingreso != " ":
+    if ingreso != 1 and ingreso != 2 and ingreso != 3 and ingreso!=4 and ingreso !=5 and ingreso != " ":
         print("Opcion Invalida")
         input("presione una tecla ")
     else:
         return ingreso
-    #return int(input("Seleccione una opción: "))
 
+#Menu del administrador seccion modificaciones
 def mostrarMenuModificar():
     print("\n=== Menú Modificar Película ===")
     print("1. Modificar nombre")
@@ -256,9 +246,35 @@ def mostrarMenuModificar():
         return ingreso
     #return int(input("Seleccione una opción: "))
 
-"""
-Lo guardo para mas tarde, en el sprint 7
+#Menu de mostrar estadisticas
+def mostrarMenuEstadisticas():
+    clear()
+    print("\n=== Menu Estadisticas ===")
+    print("1. Estadisticas de precios")
+    print("2. Estadisticas de duraciones")
+    ingreso = int(input("Ingrese una opcion: "))
 
+    if ingreso != 1 and ingreso != 2 and ingreso != " ":
+        print("Opcion Invalida")
+        input("presione una tecla ")
+    else:
+        return ingreso
+
+# Menu de busqueda
+def mostrarMenuBuscar():
+    clear()
+    print("Buscar por:")
+    print("1. Nombre")
+    print("2. Código")
+    print("3. Salir")
+    opcion = int(input("Seleccione una opción: "))
+
+    if opcion!=1 and opcion!=2 and opcion!=3 and opcion!=" ":
+        print("Opcion invalida")
+    else:
+        return opcion
+
+# Funcion para logearse, si la contraseña es incorrecta no entrara al menu de administrador
 def log_in():
     clear()
     print("\n=== Login ===")
@@ -268,4 +284,3 @@ def log_in():
         print("Contraseña incorrecta")
         password = input("Reintentar ")
 
-"""

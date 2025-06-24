@@ -104,16 +104,33 @@ def buscarPelicula(nombres, codigos, stocks, precios, duraciones, criterio):
     else:
         print("Opcion invalida")
 
+# Función para verificar si un elemento ya existe en una lista
+def verificarDuplicado(lista, elemento):
+    i = 0
+    encontrado = False
+
+    # Recorre la lista hasta encontrar el elemento
+    while i < len(lista) and lista[i] != elemento:
+        i = i + 1
+
+    # Si lo encuentra, marca como duplicado
+    if i < len(lista):
+        encontrado = True
+
+    return encontrado, i
+
+
 # Funcion para poder ver cuanto es el precio que se espera a ganar si se venden cierta cantidad de stock de una pelicula
-def ingresoEsperado(listaPrecio, cantEsperada, codigoPelicula, codPeli):
-    for i in range(len(listaPrecio)):
-        for i in range(len(codigoPelicula)):
-            if codigoPelicula[i] == codPeli:
-                valorEsperado = listaPrecio[i] * cantEsperada
-    return valorEsperado
+def ingresoEsperado(listaPrecio, cantEsperada, codigoPelicula, codPeli, listaNombres):
+    for i in range(len(codigoPelicula)):
+        if codigoPelicula[i] == codPeli:
+            print("Película:", listaNombres[i])
+            return listaPrecio[i] * cantEsperada
+    return 0
 
 # Funcion para ordenar peliculas segun el criterio que se le pase por parametro
 def ordenarPeliculas(criterio, nombres, codigos, stocks, precios, duraciones):
+    """Recibe 5 listas y las ordena dependiendo el criterio que se pase por parametro. """
     if criterio == "nombre":
         clave = nombres
     elif criterio == "codigo":
@@ -202,7 +219,8 @@ def mostrarMenuAdm():
     print("1. Cargar películas")
     print("2. Modificar película")
     print("3. Mostrar peliculas")
-    print("4. Volver")
+    print("4. Calcular valor esperado")
+    print("5. Volver")
     ingreso = int(input("Ingrese una opcion: "))
 
     if ingreso != 1 and ingreso != 2 and ingreso != 3 and ingreso != 4 and ingreso != " ":

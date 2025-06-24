@@ -80,8 +80,27 @@ def main():
                     # Cualquier otro ingreso sera invalido
                     else:
                         print("Opción inválida")
-                # Opcion 4, Salir
+
+                # Opcion 4 Ingreso esperado
                 elif opcionAdm == 4:
+                    clear()
+                    codIn = int(input("Ingrese el código de la película para simular las ventas: "))
+
+                    existe, pos = verificarDuplicado(codigos, codIn)
+
+                    if existe == False:
+                        print("El código ingresado no existe.")
+                        input("Presione una tecla para continuar...")
+                    else:
+                        cantEsperada = int(input("Ingrese la cantidad que espera vender: "))
+                        valorEsperado = ingresoEsperado(precios, cantEsperada, codigos, codIn, nombres)
+                        print("Película:", nombres[pos])
+                        print("Si vende", cantEsperada, "unidades de '", nombres[pos], "', ganará:", valorEsperado, "$")
+                        input("Presione una tecla para continuar...")
+
+
+                # Opcion 5, Salir
+                elif opcionAdm == 5:
 
                     flagSalirAdm = 1
 
